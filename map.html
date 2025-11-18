@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Map - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="map.html" class="active">Map</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="admin.php">Admin</a></li>
+                <li><a href="signup.html">Sign-up</a> / <a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="map-section">
+        <div class="map-container">
+            <div id="map"></div>
+
+            <div class="map-sidebar" id="mapSidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-map-marked-alt"></i> Active Incidents</h2>
+                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="sidebar-content">
+                    <div class="incident-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="fire">Fire</button>
+                        <button class="filter-btn" data-filter="accident">Accident</button>
+                        <button class="filter-btn" data-filter="medical">Medical</button>
+                        <button class="filter-btn" data-filter="theft">Theft</button>
+                        <button class="filter-btn" data-filter="assault">Assault</button>
+                    </div>
+
+                    <div class="incident-list" id="incidentList">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button class="floating-sos" id="floatingSOS" aria-label="Emergency SOS">
+        <i class="fas fa-phone"></i>
+        SOS
+    </button>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/map.js"></script>
+</body>
+</html>

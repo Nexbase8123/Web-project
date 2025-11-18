@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNN Emergency - Smart Emergency Reporting and Response System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="admin.php">Admin</a></li>
+                <li><a href="signup.html">Sign-up</a> / <a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Smart Emergency Reporting and Response System</h1>
+            <p>Report emergencies swiftly, track incidents in real time, and coordinate responders efficiently.</p>
+            <a href="report.html" class="btn-emergency"><i class="fas fa-exclamation-circle"></i> Report Emergency</a>
+        </div>
+    </section>
+
+    <section class="about">
+        <h2>About UNN Emergency</h2>
+        <p>UNN Emergency helps communities stay safer by enabling quick reporting, smart coordination across agencies, and data-driven response.</p>
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Reporting</h3>
+                <p>Submit detailed emergency reports with GPS and media attachments.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-map"></i>
+                <h3>Live Map</h3>
+                <p>View active incidents and responder locations on an interactive map.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-people-arrows"></i>
+                <h3>Multi-Agency</h3>
+                <p>Coordinate police, fire, and medical teams seamlessly.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Insights</h3>
+                <p>Analyze reports and outcomes to improve future responses.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="safety-tips">
+        <h2>Safety Tips</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <i class="fas fa-fire-extinguisher"></i>
+                <h3>Fire Safety</h3>
+                <ul>
+                    <li>Keep extinguishers accessible</li>
+                    <li>Test smoke alarms monthly</li>
+                    <li>Plan evacuation routes</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-first-aid"></i>
+                <h3>Medical Emergencies</h3>
+                <ul>
+                    <li>Know basic first aid</li>
+                    <li>Carry emergency numbers</li>
+                    <li>Report symptoms quickly</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Personal Safety</h3>
+                <ul>
+                    <li>Stay aware of surroundings</li>
+                    <li>Travel in groups at night</li>
+                    <li>Secure personal belongings</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <h2>Contact Support</h2>
+        <form id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message"><i class="fas fa-comment"></i> Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn-emergency"><i class="fas fa-paper-plane"></i> Send</button>
+            <p id="contactStatus"></p>
+        </form>
+    </section>
+
+    <button class="floating-sos" id="floatingSOS" aria-label="Emergency SOS">
+        <i class="fas fa-phone"></i>
+        SOS
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UNN Emergency</h3>
+                    <p>Smart Emergency Reporting and Response System</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Emergency Contacts</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Police: 112</li>
+                        <li><i class="fas fa-phone"></i> Fire: 112</li>
+                        <li><i class="fas fa-phone"></i> Ambulance: 112</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UNN Emergency. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

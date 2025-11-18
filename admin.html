@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="admin.php" class="active">Admin</a></li>
+                <li><a href="signup.html">Sign-up</a> / <a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <a href="#responders">
+                        <i class="fas fa-users"></i>
+                        <span>Responders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#categories">
+                        <i class="fas fa-tags"></i>
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#statistics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Statistics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users">
+                        <i class="fas fa-user-cog"></i>
+                        <span>User Accounts</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Admin Management</h1>
+                <div class="user-info">
+                    <i class="fas fa-user-shield"></i>
+                    <span>System Administrator</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Responders</h3>
+                        <p class="stat-number" id="totalRespondersCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Users</h3>
+                        <p class="stat-number" id="activeUsersCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Reports</h3>
+                        <p class="stat-number" id="totalReportsCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Categories</h3>
+                        <p class="stat-number" id="categoriesCount">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="admin-section" id="responders">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Manage Responders</h2>
+                        <button class="btn-add" id="addResponderBtn">
+                            <i class="fas fa-plus"></i> Add New Responder
+                        </button>
+                    </div>
+
+                    <div class="table-controls">
+                        <input type="text" id="searchResponders" placeholder="Search responders by name..." class="search-input">
+                        <select id="filterResponderStatus" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Agency</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="respondersTableBody">
+                                <tr>
+                                    <td>RSP001</td>
+                                    <td>John Okeke</td>
+                                    <td>Fire Fighter</td>
+                                    <td>Fire Service</td>
+                                    <td>+234 801 234 5678</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP002</td>
+                                    <td>Mary Eze</td>
+                                    <td>Paramedic</td>
+                                    <td>Medical Services</td>
+                                    <td>+234 802 345 6789</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP003</td>
+                                    <td>David Okonkwo</td>
+                                    <td>Police Officer</td>
+                                    <td>Police Force</td>
+                                    <td>+234 803 456 7890</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP004</td>
+                                    <td>Grace Nwankwo</td>
+                                    <td>EMT</td>
+                                    <td>Medical Services</td>
+                                    <td>+234 804 567 8901</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP005</td>
+                                    <td>Peter Udo</td>
+                                    <td>Fire Chief</td>
+                                    <td>Fire Service</td>
+                                    <td>+234 805 678 9012</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP006</td>
+                                    <td>Chioma Nnaji</td>
+                                    <td>Dispatcher</td>
+                                    <td>Emergency Control</td>
+                                    <td>+234 806 111 2222</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP007</td>
+                                    <td>Kelvin Uche</td>
+                                    <td>Rescue Officer</td>
+                                    <td>Medical Services</td>
+                                    <td>+234 807 333 4444</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP008</td>
+                                    <td>Halima Bello</td>
+                                    <td>Police Officer</td>
+                                    <td>Police Force</td>
+                                    <td>+234 808 555 6666</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP009</td>
+                                    <td>Samuel Ibe</td>
+                                    <td>Paramedic</td>
+                                    <td>Medical Services</td>
+                                    <td>+234 809 777 8888</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RSP010</td>
+                                    <td>Rita Chukwu</td>
+                                    <td>Fire Fighter</td>
+                                    <td>Fire Service</td>
+                                    <td>+234 810 999 0000</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section" id="categories">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tags"></i> Emergency Categories</h2>
+                        <button class="btn-add" id="addCategoryBtn"><i class="fas fa-plus"></i> Add Category</button>
+                    </div>
+
+                    <div class="table-controls">
+                        <input type="text" id="searchCategories" placeholder="Search categories..." class="search-input">
+                    </div>
+
+                    <div class="categories-grid" id="categoriesGrid"></div>
+                </div>
+
+                <div class="admin-section" id="statistics">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Statistics</h2>
+                        <div class="table-controls">
+                            <select id="statsRange" class="filter-select">
+                                <option value="all">All</option>
+                                <option value="7d">Last 7 days</option>
+                                <option value="30d">Last 30 days</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-chart-bar"></i> Incidents by Type</h3>
+                            <canvas id="adminIncidentTypeChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3><i class="fas fa-chart-pie"></i> Status Distribution</h3>
+                            <canvas id="adminStatusPieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section" id="users">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-cog"></i> User Accounts</h2>
+                        <button class="btn-add" id="addUserBtn"><i class="fas fa-user-plus"></i> Add User</button>
+                    </div>
+
+                    <div class="table-controls">
+                        <input type="text" id="searchUsers" placeholder="Search users by name or email..." class="search-input">
+                        <select id="filterUserStatus" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Reports</th>
+                                    <th>Joined</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="addResponderModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Add New Responder</h2>
+                <button class="close-modal" id="closeResponderModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addResponderForm">
+                <div class="form-group">
+                    <label for="responderName">Full Name</label>
+                    <input type="text" id="responderName" required>
+                </div>
+                <div class="form-group">
+                    <label for="responderRole">Role</label>
+                    <select id="responderRole" required>
+                        <option value="">Select role</option>
+                        <option value="firefighter">Fire Fighter</option>
+                        <option value="paramedic">Paramedic</option>
+                        <option value="police">Police Officer</option>
+                        <option value="emt">EMT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="responderAgency">Agency</label>
+                    <select id="responderAgency" required>
+                        <option value="">Select agency</option>
+                        <option value="fire">Fire Service</option>
+                        <option value="medical">Medical Services</option>
+                        <option value="police">Police Force</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="responderContact">Contact Number</label>
+                    <input type="tel" id="responderContact" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-modal-primary">Add Responder</button>
+                    <button type="button" class="btn-modal-secondary" id="cancelResponderBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addCategoryModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-tag"></i> Add Category</h2>
+                <button class="close-modal" id="closeCategoryModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addCategoryForm">
+                <div class="form-group">
+                    <label for="categoryName">Category Name</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoryIcon">Icon (Font Awesome class)</label>
+                    <input type="text" id="categoryIcon" placeholder="fa-fire" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoryTotal">Initial Total Reports</label>
+                    <input type="number" id="categoryTotal" min="0" value="0" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-modal-primary">Add</button>
+                    <button type="button" class="btn-modal-secondary" id="cancelCategoryBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editCategoryModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-tag"></i> Edit Category</h2>
+                <button class="close-modal" id="closeEditCategoryModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editCategoryForm">
+                <input type="hidden" id="editCategoryIndex">
+                <div class="form-group">
+                    <label for="editCategoryName">Category Name</label>
+                    <input type="text" id="editCategoryName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCategoryIcon">Icon (Font Awesome class)</label>
+                    <input type="text" id="editCategoryIcon" placeholder="fa-fire" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCategoryTotal">Total Reports</label>
+                    <input type="number" id="editCategoryTotal" min="0" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-modal-primary">Save</button>
+                    <button type="button" class="btn-modal-secondary" id="cancelEditCategoryBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addUserModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Add User</h2>
+                <button class="close-modal" id="closeUserModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Phone</label>
+                    <input type="tel" id="userPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="userStatus">Status</label>
+                    <select id="userStatus" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-modal-primary">Add User</button>
+                    <button type="button" class="btn-modal-secondary" id="cancelUserBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        fetch('api/session.php').then(r=>r.json()).then(s=>{ if(!s.authenticated || s.role !== 'admin'){ window.location.href='sign-up.html'; } }).catch(()=>{});
+        document.getElementById('sidebarToggleBtn').addEventListener('click', () => {
+            document.getElementById('dashboardSidebar').classList.toggle('collapsed');
+        });
+
+        function fetchJSON(url){ return fetch(url).then(r => r.json()); }
+
+        function renderStats(stats){
+            document.getElementById('totalRespondersCount').textContent = stats.totalResponders;
+            document.getElementById('activeUsersCount').textContent = stats.activeUsers;
+            document.getElementById('totalReportsCount').textContent = stats.totalReports;
+            document.getElementById('categoriesCount').textContent = stats.categories;
+        }
+
+        function renderResponders(list){
+            const tbody = document.getElementById('respondersTableBody');
+            tbody.innerHTML = '';
+            list.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${r.id}</td>
+                    <td>${r.name}</td>
+                    <td>${r.role}</td>
+                    <td>${r.agency}</td>
+                    <td>${r.contact}</td>
+                    <td><span class="status-badge ${r.status.toLowerCase()}">${r.status}</span></td>
+                    <td>
+                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderCategories(list){
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = '';
+            list.forEach((c, idx) => {
+                const div = document.createElement('div');
+                div.className = 'category-card';
+                div.innerHTML = `
+                    <i class="fas ${c.icon}"></i>
+                    <h3>${c.name}</h3>
+                    <p>Total Reports: ${c.totalReports}</p>
+                    <div class="card-actions">
+                        <button class="action-btn edit btn-edit-category" data-index="${idx}" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete btn-delete-category" data-index="${idx}" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>`;
+                grid.appendChild(div);
+            });
+        }
+
+        function renderUsers(list){
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+            list.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${u.id}</td>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>${u.phone}</td>
+                    <td>${u.reports}</td>
+                    <td>${u.joined}</td>
+                    <td><span class="status-badge ${u.status.toLowerCase()}">${u.status}</span></td>
+                    <td>
+                        <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function init(){
+            fetchJSON('api/stats.php').then(renderStats).catch(()=>{});
+            fetchJSON('api/responders.php').then(renderResponders).catch(()=>{});
+            fetchJSON('api/categories.php').then(data=>{ window.categoriesData = data; renderCategories(window.categoriesData); }).catch(()=>{ window.categoriesData = []; renderCategories(window.categoriesData); });
+            fetchJSON('api/users.php').then(renderUsers).catch(()=>{});
+        }
+        init();
+
+        function computeAdminStats(data){ const byType={}; const byStatus={}; data.forEach(d=>{ const t=(d.type||'unknown').toLowerCase(); const s=(d.status||'reported').toLowerCase(); byType[t]=(byType[t]||0)+1; byStatus[s]=(byStatus[s]||0)+1; }); return {byType, byStatus}; }
+        function renderAdminCharts(stats){ const typeCtx=document.getElementById('adminIncidentTypeChart'); const statusCtx=document.getElementById('adminStatusPieChart'); if(!typeCtx||!statusCtx||!window.Chart) return; const tl=Object.keys(stats.byType).map(k=>k.charAt(0).toUpperCase()+k.slice(1)); const td=Object.values(stats.byType); const sl=Object.keys(stats.byStatus).map(k=>k.charAt(0).toUpperCase()+k.slice(1)); const sd=Object.values(stats.byStatus); new Chart(typeCtx,{type:'bar',data:{labels:tl,datasets:[{label:'Incidents',data:td,backgroundColor:['#2E7D32','#1976D2','#388E3C','#F57C00','#7B1FA2','#757575']}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}}}}); new Chart(statusCtx,{type:'pie',data:{labels:sl,datasets:[{data:sd,backgroundColor:['#757575','#1976D2','#F57C00','#388E3C','#7B1FA2']}]},options:{responsive:true,maintainAspectRatio:true}}); }
+        fetch('api/incidents.php').then(r=>r.json()).then(d=>{ const s=computeAdminStats(d); renderAdminCharts(s); }).catch(()=>{});
+
+        const respondersSearch = document.getElementById('searchResponders');
+        const respondersStatus = document.getElementById('filterResponderStatus');
+        function filterResponders(){
+            const q = (respondersSearch?.value || '').toLowerCase();
+            const status = respondersStatus?.value || 'all';
+            document.querySelectorAll('#respondersTableBody tr').forEach(tr => {
+                const name = tr.children[1]?.textContent.toLowerCase();
+                const sBadge = tr.querySelector('.status-badge');
+                const s = sBadge ? sBadge.textContent.toLowerCase() : '';
+                const match = (!q || (name && name.includes(q))) && (status === 'all' || s === status);
+                tr.style.display = match ? '' : 'none';
+            });
+        }
+        respondersSearch && respondersSearch.addEventListener('input', filterResponders);
+        respondersStatus && respondersStatus.addEventListener('change', filterResponders);
+
+        const searchCategories = document.getElementById('searchCategories');
+        function filterCategories(){
+            const q = (searchCategories?.value || '').toLowerCase();
+            document.querySelectorAll('#categoriesGrid .category-card').forEach(card => {
+                const name = card.querySelector('h3')?.textContent.toLowerCase();
+                card.style.display = (!q || (name && name.includes(q))) ? '' : 'none';
+            });
+        }
+        searchCategories && searchCategories.addEventListener('input', filterCategories);
+
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+        const addCategoryModal = document.getElementById('addCategoryModal');
+        const closeCategoryModal = document.getElementById('closeCategoryModal');
+        const cancelCategoryBtn = document.getElementById('cancelCategoryBtn');
+        const addCategoryForm = document.getElementById('addCategoryForm');
+        addCategoryBtn && addCategoryBtn.addEventListener('click', () => { addCategoryModal.style.display = 'flex'; });
+        closeCategoryModal && closeCategoryModal.addEventListener('click', () => { addCategoryModal.style.display = 'none'; });
+        cancelCategoryBtn && cancelCategoryBtn.addEventListener('click', () => { addCategoryModal.style.display = 'none'; });
+        addCategoryForm && addCategoryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('categoryName').value.trim();
+            const icon = document.getElementById('categoryIcon').value.trim();
+            const total = parseInt(document.getElementById('categoryTotal').value, 10) || 0;
+            window.categoriesData = window.categoriesData || [];
+            window.categoriesData.push({ name, icon, totalReports: total });
+            renderCategories(window.categoriesData);
+            const countEl = document.getElementById('categoriesCount');
+            if (countEl) { countEl.textContent = window.categoriesData.length; }
+            addCategoryModal.style.display = 'none';
+            addCategoryForm.reset();
+        });
+
+        document.getElementById('categoriesGrid').addEventListener('click', (e)=>{
+            const editBtn = e.target.closest('.btn-edit-category');
+            const delBtn = e.target.closest('.btn-delete-category');
+            if (editBtn) {
+                const idx = parseInt(editBtn.dataset.index, 10);
+                const c = (window.categoriesData||[])[idx];
+                if (!c) return;
+                document.getElementById('editCategoryIndex').value = idx;
+                document.getElementById('editCategoryName').value = c.name;
+                document.getElementById('editCategoryIcon').value = c.icon;
+                document.getElementById('editCategoryTotal').value = c.totalReports;
+                document.getElementById('editCategoryModal').style.display = 'flex';
+            }
+            if (delBtn) {
+                const idx = parseInt(delBtn.dataset.index, 10);
+                if (!isNaN(idx)) {
+                    (window.categoriesData||[]).splice(idx, 1);
+                    renderCategories(window.categoriesData);
+                    const countEl = document.getElementById('categoriesCount');
+                    if (countEl) { countEl.textContent = window.categoriesData.length; }
+                }
+            }
+        });
+        document.getElementById('closeEditCategoryModal')?.addEventListener('click', ()=>{ document.getElementById('editCategoryModal').style.display='none'; });
+        document.getElementById('cancelEditCategoryBtn')?.addEventListener('click', ()=>{ document.getElementById('editCategoryModal').style.display='none'; });
+        document.getElementById('editCategoryForm')?.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('editCategoryIndex').value, 10);
+            const name = document.getElementById('editCategoryName').value.trim();
+            const icon = document.getElementById('editCategoryIcon').value.trim();
+            const total = parseInt(document.getElementById('editCategoryTotal').value, 10) || 0;
+            if (!isNaN(idx) && window.categoriesData && window.categoriesData[idx]) {
+                window.categoriesData[idx] = { name, icon, totalReports: total };
+                renderCategories(window.categoriesData);
+                const countEl = document.getElementById('categoriesCount');
+                if (countEl) { countEl.textContent = window.categoriesData.length; }
+            }
+            document.getElementById('editCategoryModal').style.display='none';
+            e.target.reset();
+        });
+
+        document.getElementById('addResponderBtn').addEventListener('click', () => {
+            document.getElementById('addResponderModal').style.display = 'flex';
+        });
+        document.getElementById('closeResponderModal').addEventListener('click', () => {
+            document.getElementById('addResponderModal').style.display = 'none';
+        });
+        document.getElementById('cancelResponderBtn').addEventListener('click', () => {
+            document.getElementById('addResponderModal').style.display = 'none';
+        });
+        document.getElementById('addResponderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('addResponderModal').style.display = 'none';
+            document.getElementById('addResponderForm').reset();
+        });
+
+        const usersSearch = document.getElementById('searchUsers');
+        const usersStatus = document.getElementById('filterUserStatus');
+        function filterUsers(){
+            const q = (usersSearch?.value || '').toLowerCase();
+            const status = usersStatus?.value || 'all';
+            document.querySelectorAll('#usersTableBody tr').forEach(tr => {
+                const name = tr.children[1]?.textContent.toLowerCase();
+                const email = tr.children[2]?.textContent.toLowerCase();
+                const sBadge = tr.querySelector('.status-badge');
+                const s = sBadge ? sBadge.textContent.toLowerCase() : '';
+                const matchText = (!q || (name && name.includes(q)) || (email && email.includes(q)));
+                const matchStatus = (status === 'all' || s === status);
+                tr.style.display = (matchText && matchStatus) ? '' : 'none';
+            });
+        }
+        usersSearch && usersSearch.addEventListener('input', filterUsers);
+        usersStatus && usersStatus.addEventListener('change', filterUsers);
+
+        const addUserBtn = document.getElementById('addUserBtn');
+        const addUserModal = document.getElementById('addUserModal');
+        const closeUserModal = document.getElementById('closeUserModal');
+        const cancelUserBtn = document.getElementById('cancelUserBtn');
+        const addUserForm = document.getElementById('addUserForm');
+        addUserBtn && addUserBtn.addEventListener('click', () => { addUserModal.style.display = 'flex'; });
+        closeUserModal && closeUserModal.addEventListener('click', () => { addUserModal.style.display = 'none'; });
+        cancelUserBtn && cancelUserBtn.addEventListener('click', () => { addUserModal.style.display = 'none'; });
+        addUserForm && addUserForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            const status = document.getElementById('userStatus').value;
+            const tbody = document.getElementById('usersTableBody');
+            const id = 'USR' + String(tbody.querySelectorAll('tr').length + 1).padStart(3, '0');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${phone}</td>
+                <td>0</td>
+                <td>${new Date().toLocaleDateString()}</td>
+                <td><span class="status-badge ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span></td>
+                <td>
+                    <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete" title="Remove"><i class="fas fa-trash"></i></button>
+                </td>`;
+            tbody.appendChild(tr);
+            addUserModal.style.display = 'none';
+            addUserForm.reset();
+            filterUsers();
+        });
+    </script>
+<script>
+    let lastIncidentId = null;
+    function showNewReportAlert(incident){
+        const el = document.createElement('div');
+        el.id = 'newReportAlert';
+        el.style.position = 'fixed';
+        el.style.top = '20px';
+        el.style.right = '20px';
+        el.style.padding = '12px 16px';
+        el.style.background = 'var(--primary-red)';
+        el.style.color = '#fff';
+        el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        el.style.zIndex = '9999';
+        el.style.borderRadius = '8px';
+        el.innerHTML = `<i class="fas fa-bell"></i> New report: ${incident.type} at ${incident.location}`;
+        document.body.appendChild(el);
+        setTimeout(()=>{ el.remove(); }, 5000);
+    }
+    async function pollIncidents(){
+        try{
+            const res = await fetch('api/incidents.php');
+            const list = await res.json();
+            if (!Array.isArray(list) || list.length === 0) return;
+            const latest = list[0];
+            if (lastIncidentId === null) { lastIncidentId = latest.id; return; }
+            if (latest.id !== lastIncidentId) { lastIncidentId = latest.id; showNewReportAlert(latest); }
+        }catch(e){}
+    }
+    setInterval(pollIncidents, 10000);
+    pollIncidents();
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!-- c:\xampp\htdocs\project-bolt-sb1-3amncemo\project\signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo-large">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>UNN Emergency</h1>
+                <p>Create your SERS account</p>
+            </div>
+
+            <form class="login-form" id="signupForm">
+                <h2>Sign Up</h2>
+
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-at"></i> Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="08012345678">
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+
+                <div id="signupError" class="form-error" role="alert" style="display:none;"></div>
+
+                <div class="login-footer">
+                    <p>Already have an account? <a href="sign-up.html">Click here to login</a>.</p>
+                </div>
+            </form>
+        </div>
+
+        <div class="login-info">
+            <h2>Join SERS</h2>
+            <p>Report emergencies and get help fast. Your account lets you track reports and access the dashboard.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Secure password storage</li>
+                <li><i class="fas fa-check-circle"></i> Role-based access</li>
+                <li><i class="fas fa-check-circle"></i> Real-time updates</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-login');
+            const errorBox = document.getElementById('signupError');
+            if (errorBox) { errorBox.style.display = 'none'; errorBox.textContent = ''; }
+
+            const name = document.getElementById('name').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!name || !username || !email || !password) {
+                if (errorBox) { errorBox.textContent = 'All required fields must be filled'; errorBox.style.display = 'block'; } else { alert('All required fields must be filled'); }
+                return;
+            }
+
+            btn && (btn.disabled = true);
+            try {
+                const res = await fetch('api/signup.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, username, email, phone, password })
+                });
+                const ct = res.headers.get('content-type') || '';
+                const isJson = ct.includes('application/json');
+                const data = isJson ? await res.json() : null;
+                if (!res.ok || !data?.success) {
+                    const text = isJson ? (data?.error || 'Signup failed') : await res.text();
+                    throw new Error(text || 'Signup failed');
+                }
+                alert('Account created. Please login.');
+                window.location.href = 'login.html';
+            } catch (err) {
+                if (errorBox) { errorBox.textContent = err.message || 'Signup failed'; errorBox.style.display = 'block'; } else { alert(err.message || 'Signup failed'); }
+            } finally {
+                btn && (btn.disabled = false);
+            }
+        });
+    </script>
+</body>
+</html>

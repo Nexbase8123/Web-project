@@ -1,0 +1,323 @@
+<!-- c:\Users\ifeol\Downloads\project-bolt-sb1-3amncemo\project\dispatcher.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispatcher Dashboard - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-headset"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="admin.php">Admin</a></li>
+                <li><a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <a href="#queue">
+                        <i class="fas fa-list"></i>
+                        <span>Dispatch Queue</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#assignments">
+                        <i class="fas fa-people-carry"></i>
+                        <span>Assignments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#calls">
+                        <i class="fas fa-phone"></i>
+                        <span>Active Calls</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#summary">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Summary</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Dispatcher Dashboard</h1>
+                <div class="user-info">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Dispatcher</span>
+                </div>
+            </div>
+
+            <div class="stats-grid" id="summary">
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3>Incidents</h3>
+                        <p class="stat-number" id="sumIncidents">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>Responders</h3>
+                        <p class="stat-number" id="sumResponders">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Resolved</h3>
+                        <p class="stat-number" id="sumResolved">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-phone"></i></div>
+                    <div class="stat-info">
+                        <h3>Active Calls</h3>
+                        <p class="stat-number" id="sumCalls">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="admin-section" id="queue">
+                    <div class="section-header">
+                        <h2><i class="fas fa-list"></i> Dispatch Queue</h2>
+                        <div class="table-controls">
+                            <input type="text" id="searchQueue" placeholder="Search incidents..." class="search-input">
+                            <select id="filterQueueStatus" class="filter-select">
+                                <option value="all">All</option>
+                                <option value="reported">Reported</option>
+                                <option value="responding">Responding</option>
+                                <option value="verified">Verified</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="incidents-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="queueTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section" id="assignments">
+                    <div class="section-header">
+                        <h2><i class="fas fa-people-carry"></i> Assignments</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Incident</th>
+                                    <th>Responder</th>
+                                    <th>Agency</th>
+                                    <th>Assigned At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assignmentsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section" id="calls">
+                    <div class="section-header">
+                        <h2><i class="fas fa-phone"></i> Active Calls</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Call ID</th>
+                                    <th>Incident</th>
+                                    <th>Dispatcher</th>
+                                    <th>Started</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="callsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        fetch('api/session.php').then(r=>r.json()).then(s=>{ if(!s.authenticated){ window.location.href='login.html'; return; } if(s.role!=='dispatcher'){ window.location.href='dashboard.php'; } }).catch(()=>{});
+        document.getElementById('sidebarToggleBtn').addEventListener('click', () => { document.getElementById('dashboardSidebar').classList.toggle('collapsed'); });
+
+        let incidents = [];
+        let responders = [];
+        let assignments = [];
+        let calls = [];
+
+        function capitalize(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+
+        function renderSummary(){
+            const totalInc = incidents.length;
+            const resolved = incidents.filter(i=>i.status==='resolved').length;
+            document.getElementById('sumIncidents').textContent = totalInc;
+            document.getElementById('sumResolved').textContent = resolved;
+            document.getElementById('sumResponders').textContent = responders.length;
+            document.getElementById('sumCalls').textContent = calls.length;
+        }
+
+        function renderQueueTable(data){
+            const tbody = document.getElementById('queueTableBody');
+            tbody.innerHTML = '';
+            data.forEach(i=>{
+                const tr = document.createElement('tr');
+                const statusClass = i.status.toLowerCase();
+                const priority = (i.type==='Fire'||i.type==='Assault') ? 'High' : (i.type==='Accident' ? 'Medium' : 'Low');
+                tr.innerHTML = `
+                    <td><strong>${i.id}</strong></td>
+                    <td><span class="type-badge ${i.type.toLowerCase()}">${i.type}</span></td>
+                    <td><i class="fas fa-map-marker-alt"></i> ${i.location}</td>
+                    <td><span class="status-badge ${statusClass}">${capitalize(i.status)}</span></td>
+                    <td>${priority}</td>
+                    <td>
+                        <button class="action-btn view" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn assign" title="Assign"><i class="fas fa-user-plus"></i></button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderAssignmentsTable(){
+            const tbody = document.getElementById('assignmentsTableBody');
+            tbody.innerHTML = '';
+            assignments.forEach(a=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${a.incidentId}</td>
+                    <td>${a.responder.name}</td>
+                    <td>${a.responder.agency}</td>
+                    <td>${a.assignedAt}</td>
+                    <td><span class="status-badge responding">Responding</span></td>
+                    <td><button class="action-btn delete unassign" data-id="${a.incidentId}"><i class="fas fa-times"></i></button></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderCallsTable(){
+            const tbody = document.getElementById('callsTableBody');
+            tbody.innerHTML = '';
+            calls.forEach(c=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${c.id}</td>
+                    <td>${c.incidentId}</td>
+                    <td>${c.dispatcher}</td>
+                    <td>${c.started}</td>
+                    <td><span class="status-badge active">Active</span></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function refreshAll(){
+            const queue = incidents.filter(i=>['reported','responding','verified'].includes(i.status));
+            renderQueueTable(queue);
+            renderAssignmentsTable();
+            renderCallsTable();
+            renderSummary();
+        }
+
+        function loadData(){
+            fetch('api/incidents.php').then(r=>r.json()).then(data=>{
+                incidents = data.map(d=>({ id:d.id, type:capitalize(d.type), location:d.location, status:(d.status||'reported'), time:d.time||'' }));
+                refreshAll();
+            }).catch(()=>{ refreshAll(); });
+
+            fetch('api/responders.php').then(r=>r.json()).then(data=>{
+                responders = data.map(x=>({ id:x.id, name:x.name, agency:x.agency }));
+                refreshAll();
+            }).catch(()=>{});
+        }
+        loadData();
+
+        document.getElementById('searchQueue').addEventListener('input', (e)=>{
+            const q = e.target.value.toLowerCase();
+            const filtered = incidents.filter(i=>
+                i.id.toLowerCase().includes(q) ||
+                i.type.toLowerCase().includes(q) ||
+                i.location.toLowerCase().includes(q) ||
+                i.status.toLowerCase().includes(q)
+            );
+            renderQueueTable(filtered);
+        });
+        document.getElementById('filterQueueStatus').addEventListener('change', (e)=>{
+            const s = e.target.value;
+            const filtered = s==='all' ? incidents : incidents.filter(i=>i.status===s);
+            renderQueueTable(filtered);
+        });
+
+        document.getElementById('queueTableBody').addEventListener('click', (e)=>{
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const row = btn.closest('tr');
+            const id = row.querySelector('td strong').textContent;
+            const inc = incidents.find(x=>x.id===id);
+            if (!inc) return;
+            if (btn.classList.contains('view')) {
+                alert('Incident '+inc.id+' '+inc.type+' at '+inc.location);
+            }
+            if (btn.classList.contains('assign')) {
+                if (!responders.length) return;
+                const list = responders.map(r=>r.name).join(', ');
+                const name = prompt('Assign responder ('+list+'):', responders[0].name);
+                const r = responders.find(x=>x.name===name) || responders[0];
+                const time = new Date().toLocaleString();
+                assignments = assignments.filter(a=>a.incidentId!==inc.id).concat([{ incidentId: inc.id, responder: r, assignedAt: time }]);
+                inc.status = 'responding';
+                refreshAll();
+            }
+        });
+
+        document.getElementById('assignmentsTableBody').addEventListener('click', (e)=>{
+            const btn = e.target.closest('.unassign');
+            if (!btn) return;
+            const id = btn.dataset.id;
+            assignments = assignments.filter(a=>a.incidentId!==id);
+            const inc = incidents.find(x=>x.id===id);
+            if (inc) inc.status = 'reported';
+            refreshAll();
+        });
+    </script>
+</body>
+</html>

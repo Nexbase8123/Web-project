@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Emergency - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html" class="active">Report</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="admin.php">Admin</a></li>
+                <li><a href="signup.html">Sign-up</a> / <a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="report-section">
+        <div class="container">
+            <h1><i class="fas fa-exclamation-circle"></i> Report Emergency</h1>
+            <p class="subtitle">Fill out the form below to report an emergency. All fields are required.</p>
+
+            <form class="report-form" id="reportForm">
+                <div class="form-card">
+                    <h2>Emergency Details</h2>
+
+                    <div class="form-group">
+                        <label for="emergencyType">
+                            <i class="fas fa-list"></i> Emergency Type
+                        </label>
+                        <select id="emergencyType" name="emergencyType">
+                            <option value="">Select emergency type</option>
+                            <option value="fire">Fire</option>
+                            <option value="accident">Accident</option>
+                            <option value="medical">Medical Emergency</option>
+                            <option value="theft">Theft</option>
+                            <option value="assault">Assault</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emergencyTypeOther">
+                            <i class="fas fa-pencil-alt"></i> Other Emergency Type (optional)
+                        </label>
+                        <input type="text" id="emergencyTypeOther" name="emergencyTypeOther" placeholder="Type the emergency if not listed">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">
+                            <i class="fas fa-file-alt"></i> Description *
+                        </label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="5"
+                            placeholder="Provide detailed description of the emergency..."
+                            required
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>Location Information</h2>
+
+                    <div class="location-btn-group">
+                        <button type="button" class="btn-location" id="detectLocation">
+                            <i class="fas fa-crosshairs"></i> Auto-Detect GPS Location
+                        </button>
+                        <span class="location-status" id="locationStatus"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="latitude">
+                                <i class="fas fa-map-pin"></i> Latitude
+                            </label>
+                            <input
+                                type="text"
+                                id="latitude"
+                                name="latitude"
+                                readonly
+                                placeholder="Click detect button"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude">
+                                <i class="fas fa-map-pin"></i> Longitude
+                            </label>
+                            <input
+                                type="text"
+                                id="longitude"
+                                name="longitude"
+                                readonly
+                                placeholder="Click detect button"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>Media Attachments</h2>
+
+                    <div class="form-group">
+                        <label for="images">
+                            <i class="fas fa-camera"></i> Upload Images
+                        </label>
+                        <input
+                            type="file"
+                            id="images"
+                            name="images"
+                            accept="image/*"
+                            multiple
+                            class="file-input"
+                        >
+                        <div class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag images here</span>
+                            <small>Supported formats: JPG, PNG, GIF (Multiple files allowed)</small>
+                        </div>
+                        <div id="imagePreview" class="file-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="videos">
+                            <i class="fas fa-video"></i> Upload Videos
+                        </label>
+                        <input
+                            type="file"
+                            id="videos"
+                            name="videos"
+                            accept="video/*"
+                            multiple
+                            class="file-input"
+                        >
+                        <div class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag videos here</span>
+                            <small>Supported formats: MP4, MOV, AVI (Multiple files allowed)</small>
+                        </div>
+                        <div id="videoPreview" class="file-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audio">
+                            <i class="fas fa-microphone"></i> Upload Voice Notes
+                        </label>
+                        <input
+                            type="file"
+                            id="audio"
+                            name="audio"
+                            accept="audio/*"
+                            multiple
+                            class="file-input"
+                        >
+                        <div class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag audio files here</span>
+                            <small>Supported formats: MP3, WAV, M4A (Multiple files allowed)</small>
+                        </div>
+                        <div id="audioPreview" class="file-preview"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Emergency Report
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Emergency Reported Successfully!</h2>
+            <p>Your emergency report has been submitted. Emergency responders have been notified and will respond shortly.</p>
+            <p class="report-id">Report ID: <strong id="reportIdDisplay"></strong></p>
+            <div class="modal-actions">
+                <button class="btn-modal-primary" id="viewStatus">View Status</button>
+                <button class="btn-modal-secondary" id="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="floating-sos" id="floatingSOS" aria-label="Emergency SOS">
+        <i class="fas fa-phone"></i>
+        SOS
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SERS</h3>
+                    <p>Smart Emergency Reporting and Response System</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Emergency Contacts</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Police: 112</li>
+                        <li><i class="fas fa-phone"></i> Fire: 112</li>
+                        <li><i class="fas fa-phone"></i> Ambulance: 112</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SERS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

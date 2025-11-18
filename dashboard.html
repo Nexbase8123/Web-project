@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responder Dashboard - UNN Emergency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>UNN Emergency</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="dashboard.php" class="active">Dashboard</a></li>
+                <li><a href="admin.php">Admin</a></li>
+                <li><a href="signup.html">Sign-up</a> / <a href="sign-up.html">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-toggle-btn" id="sidebarToggleBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <a href="#overview">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#incidents">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Incidents</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#resources">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#agencies">
+                        <i class="fas fa-building"></i>
+                        <span>Agencies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map View</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Responder Dashboard</h1>
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>John Responder</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Responders</h3>
+                        <p class="stat-number" id="dashTotalResponders">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Reports</h3>
+                        <p class="stat-number" id="dashTotalReports">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending Reports</h3>
+                        <p class="stat-number">6</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Critical</h3>
+                        <p class="stat-number">3</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="incidents-table-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-list"></i> Recent Incidents</h2>
+                        <button class="btn-add" id="addIncidentBtn"><i class="fas fa-plus"></i> Add Incident</button>
+                        <div class="table-controls">
+                            <input type="text" id="searchIncidents" placeholder="Search incidents..." class="search-input">
+                            <select id="filterStatus" class="filter-select">
+                                <option value="all">All Status</option>
+                                <option value="reported">Reported</option>
+                                <option value="responding">Responding</option>
+                                <option value="verified">Verified</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="incidents-table" id="incidentsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Reporter</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidentsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="resources-section" id="resources">
+                    <div class="section-header">
+                        <h2><i class="fas fa-ambulance"></i> Resources</h2>
+                        <div class="table-controls">
+                            <input type="text" id="searchResources" placeholder="Search resources..." class="search-input">
+                            <select id="filterResourceType" class="filter-select">
+                                <option value="all">All Types</option>
+                                <option value="vehicle">Vehicles</option>
+                                <option value="equipment">Equipment</option>
+                                <option value="team">Teams</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="incidents-table" id="resourcesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Location</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resourcesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="agencies-section" id="agencies">
+                    <div class="section-header">
+                        <h2><i class="fas fa-building"></i> Agencies</h2>
+                        <div class="table-controls">
+                            <input type="text" id="searchAgencies" placeholder="Search agencies..." class="search-input">
+                            <select id="filterAgencyType" class="filter-select">
+                                <option value="all">All Types</option>
+                                <option value="fire">Fire Service</option>
+                                <option value="medical">Medical Services</option>
+                                <option value="police">Police Force</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="incidents-table" id="agenciesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Contact</th>
+                                    <th>Headquarters</th>
+                                    <th>Units</th>
+                                </tr>
+                            </thead>
+                            <tbody id="agenciesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3><i class="fas fa-chart-bar"></i> Incidents by Type</h3>
+                        <canvas id="incidentTypeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3><i class="fas fa-chart-pie"></i> Status Distribution</h3>
+                        <canvas id="statusPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="viewIncidentModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-eye"></i> Incident Details</h2>
+                <button class="close-modal" id="closeViewIncidentModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="incidentDetails"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="addIncidentModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus"></i> Add Incident</h2>
+                <button class="close-modal" id="closeAddIncidentModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addIncidentForm">
+                <div class="form-group">
+                    <label for="newIncidentType">Type</label>
+                    <select id="newIncidentType" required>
+                        <option value="">Select type</option>
+                        <option value="Fire">Fire</option>
+                        <option value="Accident">Accident</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Theft">Theft</option>
+                        <option value="Assault">Assault</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newIncidentLocation">Location</label>
+                    <input type="text" id="newIncidentLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="newIncidentStatus">Status</label>
+                    <select id="newIncidentStatus" required>
+                        <option value="reported">Reported</option>
+                        <option value="responding">Responding</option>
+                        <option value="verified">Verified</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-modal-primary">Add</button>
+                    <button type="button" class="btn-modal-secondary" id="cancelAddIncidentBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        fetch('api/session.php').then(r=>r.json()).then(s=>{ if(!s.authenticated){ window.location.href='login.html'; return; } if(s.role==='admin'){ window.location.href='admin.php'; } if(s.role==='dispatcher'){ window.location.href='dispatcher.php'; } });
+        let incidents = [];
+        function capitalize(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+        fetch('api/incidents.php')
+            .then(r=>r.json())
+            .then(data=>{ incidents = data.map(d=>({ id:d.id, type:capitalize(d.type), reporter:d.reporter||'Unknown', location:d.location, status:(d.status||'reported'), time:d.time||'' })); renderIncidentsTable(incidents); })
+            .catch(()=>{ renderIncidentsTable(incidents); });
+
+        function renderIncidentsTable(data = incidents) {
+            const tbody = document.getElementById('incidentsTableBody');
+            tbody.innerHTML = '';
+
+            data.forEach(incident => {
+                const row = document.createElement('tr');
+                const statusClass = incident.status.toLowerCase();
+
+                row.innerHTML = `
+                    <td><strong>${incident.id}</strong></td>
+                    <td><span class="type-badge ${incident.type.toLowerCase()}">${incident.type}</span></td>
+                    <td>${incident.reporter}</td>
+                    <td><i class="fas fa-map-marker-alt"></i> ${incident.location}</td>
+                    <td><span class="status-badge ${statusClass}">${incident.status.charAt(0).toUpperCase() + incident.status.slice(1)}</span></td>
+                    <td>${incident.time}</td>
+                    <td>
+                        <button class="action-btn view" title="View Details"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn update" title="Update Status"><i class="fas fa-edit"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        document.getElementById('searchIncidents').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = incidents.filter(inc =>
+                inc.id.toLowerCase().includes(searchTerm) ||
+                inc.type.toLowerCase().includes(searchTerm) ||
+                inc.reporter.toLowerCase().includes(searchTerm) ||
+                inc.location.toLowerCase().includes(searchTerm)
+            );
+            renderIncidentsTable(filtered);
+        });
+
+        document.getElementById('filterStatus').addEventListener('change', (e) => {
+            const status = e.target.value;
+            const filtered = status === 'all' ? incidents : incidents.filter(inc => inc.status === status);
+            renderIncidentsTable(filtered);
+        });
+
+        const barCtx = document.getElementById('incidentTypeChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Fire', 'Accident', 'Medical', 'Theft', 'Assault'],
+                datasets: [{
+                    label: 'Number of Incidents',
+                    data: [12, 19, 8, 5, 10],
+                    backgroundColor: ['#D32F2F', '#1976D2', '#388E3C', '#F57C00', '#7B1FA2']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        const pieCtx = document.getElementById('statusPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Reported', 'Responding', 'Verified', 'Resolved'],
+                datasets: [{
+                    data: [6, 8, 6, 18],
+                    backgroundColor: ['#757575', '#1976D2', '#F57C00', '#388E3C']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+
+        document.getElementById('sidebarToggleBtn').addEventListener('click', () => {
+            document.getElementById('dashboardSidebar').classList.toggle('collapsed');
+        });
+
+        fetch('api/stats.php')
+            .then(r => r.json())
+            .then(s => {
+                const respondersEl = document.getElementById('dashTotalResponders');
+                if (respondersEl) respondersEl.textContent = (s.totalResponders ?? s.responders ?? 0);
+                const reportsEl = document.getElementById('dashTotalReports');
+                if (reportsEl) reportsEl.textContent = (s.totalReports ?? s.reports ?? 0);
+            })
+            .catch(console.error);
+
+        document.getElementById('incidentsTableBody').addEventListener('click', (e)=>{
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const row = btn.closest('tr');
+            const id = row.querySelector('td strong').textContent;
+            const inc = incidents.find(x=>x.id===id);
+            if (!inc) return;
+            if (btn.classList.contains('view')) {
+                const modal = document.getElementById('viewIncidentModal');
+                const details = document.getElementById('incidentDetails');
+                details.innerHTML = `<p><strong>ID:</strong> ${inc.id}</p><p><strong>Type:</strong> ${inc.type}</p><p><strong>Location:</strong> ${inc.location}</p><p><strong>Status:</strong> ${capitalize(inc.status)}</p><p><strong>Time:</strong> ${inc.time}</p>`;
+                modal.style.display='flex';
+            }
+            if (btn.classList.contains('update')) {
+                const next = prompt('Update status (reported/responding/verified/resolved):', inc.status);
+                if (next) { inc.status = next.toLowerCase(); renderIncidentsTable(incidents); }
+            }
+        });
+        document.getElementById('closeViewIncidentModal').addEventListener('click', ()=>{ document.getElementById('viewIncidentModal').style.display='none'; });
+        document.getElementById('addIncidentBtn').addEventListener('click', ()=>{ document.getElementById('addIncidentModal').style.display='flex'; });
+        document.getElementById('closeAddIncidentModal').addEventListener('click', ()=>{ document.getElementById('addIncidentModal').style.display='none'; });
+        document.getElementById('cancelAddIncidentBtn').addEventListener('click', ()=>{ document.getElementById('addIncidentModal').style.display='none'; });
+        document.getElementById('addIncidentForm').addEventListener('submit', (e)=>{
+            e.preventDefault();
+            const id = 'INC' + Math.random().toString(36).substr(2,5).toUpperCase();
+            const type = document.getElementById('newIncidentType').value;
+            const location = document.getElementById('newIncidentLocation').value;
+            const status = document.getElementById('newIncidentStatus').value;
+            const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            incidents.unshift({ id, type, reporter:'You', location, status, time });
+            renderIncidentsTable(incidents);
+            document.getElementById('addIncidentModal').style.display='none';
+            e.target.reset();
+        });
+
+        renderIncidentsTable();
+
+        const resources = [
+            { id:'RES001', name:'Fire Truck A1', type:'vehicle', status:'Available', location:'Fire Station', availability:'On Standby' },
+            { id:'RES002', name:'Ambulance M3', type:'vehicle', status:'Deployed', location:'Engineering Gate', availability:'On Scene' },
+            { id:'RES003', name:'Defibrillator', type:'equipment', status:'Available', location:'Medical Center', availability:'Ready' },
+            { id:'RES004', name:'Rescue Team Alpha', type:'team', status:'Available', location:'Central', availability:'Ready' },
+            { id:'RES005', name:'Patrol Car P7', type:'vehicle', status:'Maintenance', location:'Garage', availability:'N/A' }
+        ];
+
+        function renderResourcesTable(data = resources) {
+            const tbody = document.getElementById('resourcesTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            data.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${r.id}</td>
+                    <td>${r.name}</td>
+                    <td><span class="type-badge ${r.type}">${r.type.charAt(0).toUpperCase()+r.type.slice(1)}</span></td>
+                    <td><span class="status-badge">${r.status}</span></td>
+                    <td><i class="fas fa-map-marker-alt"></i> ${r.location}</td>
+                    <td>${r.availability}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        const searchResources = document.getElementById('searchResources');
+        searchResources && searchResources.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            const filtered = resources.filter(r =>
+                r.id.toLowerCase().includes(q) ||
+                r.name.toLowerCase().includes(q) ||
+                r.type.toLowerCase().includes(q) ||
+                r.location.toLowerCase().includes(q)
+            );
+            renderResourcesTable(filtered);
+        });
+
+        const filterResourceType = document.getElementById('filterResourceType');
+        filterResourceType && filterResourceType.addEventListener('change', (e) => {
+            const t = e.target.value;
+            const filtered = t === 'all' ? resources : resources.filter(r => r.type === t);
+            renderResourcesTable(filtered);
+        });
+
+        renderResourcesTable();
+
+        const agencies = [
+            { id:'AGY001', name:'Fire Service', type:'fire', contact:'+234 801 111 2222', hq:'Central Station', units:5 },
+            { id:'AGY002', name:'Medical Services', type:'medical', contact:'+234 802 333 4444', hq:'Medical Center', units:8 },
+            { id:'AGY003', name:'Police Force', type:'police', contact:'+234 803 555 6666', hq:'Main HQ', units:12 }
+        ];
+
+        function renderAgenciesTable(data = agencies){
+            const tbody = document.getElementById('agenciesTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            data.forEach(a => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${a.id}</td>
+                    <td>${a.name}</td>
+                    <td><span class="type-badge ${a.type}">${a.type.charAt(0).toUpperCase()+a.type.slice(1)}</span></td>
+                    <td>${a.contact}</td>
+                    <td>${a.hq}</td>
+                    <td>${a.units}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        const searchAgencies = document.getElementById('searchAgencies');
+        searchAgencies && searchAgencies.addEventListener('input', (e)=>{
+            const q = e.target.value.toLowerCase();
+            const filtered = agencies.filter(a =>
+                a.id.toLowerCase().includes(q) ||
+                a.name.toLowerCase().includes(q) ||
+                a.type.toLowerCase().includes(q) ||
+                a.hq.toLowerCase().includes(q)
+            );
+            renderAgenciesTable(filtered);
+        });
+
+        const filterAgencyType = document.getElementById('filterAgencyType');
+        filterAgencyType && filterAgencyType.addEventListener('change', (e)=>{
+            const t = e.target.value;
+            const filtered = t === 'all' ? agencies : agencies.filter(a => a.type === t);
+            renderAgenciesTable(filtered);
+        });
+
+        renderAgenciesTable();
+    </script>
+</body>
+</html>
